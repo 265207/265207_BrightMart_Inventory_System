@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Add Employee";
+}
+
+<h1>Register New Employee</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-controller="Employees"
+      asp-action="Create"
+      method="post">
+
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input name="username"
+               class="form-control"
+               required
+               maxlength="100" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input name="password"
+               type="password"
+               class="form-control"
+               required
+               minlength="8" />
+        <small class="text-muted">
+            Password must contain at least 8 characters.
+        </small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">User Role</label>
+
+        <select name="role" class="form-select" required>
+            <option value="">-- Select a role --</option>
+            <option value="Employee">Employee</option>
+            <option value="BusinessOwner">Business Owner</option>
+            <option value="Admin">Administrator</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Create User
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

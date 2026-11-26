@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Employee Login";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow">
+            <div class="card-body p-4">
+
+                <h2 class="text-center mb-3">
+                    BrightMart Employee Login
+                </h2>
+
+                <p class="text-center text-muted">
+                    Sign in to access the management system.
+                </p>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.Error
+                    </div>
+                }
+
+                <form asp-controller="Account"
+                      asp-action="Login"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input name="username"
+                               class="form-control"
+                               required
+                               autocomplete="username" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+
+                        <div class="input-group">
+                            <input name="password"
+                                   id="password"
+                                   type="password"
+                                   class="form-control"
+                                   required
+                                   autocomplete="current-password" />
+
+                            <button type="button"
+                                    id="togglePasswordButton"
+                                    class="btn btn-outline-secondary"
+                                    onclick="togglePassword()">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-primary w-100">
+                        Login
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const button = document.getElementById("togglePasswordButton");
+
+        if (!(passwordInput instanceof HTMLInputElement) || !button) {
+            return;
+        }
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            button.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            button.textContent = "Show";
+        }
+    }
+
+</script>

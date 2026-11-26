@@ -1,0 +1,48 @@
+﻿@model BrightMartInventorySystem.Models.Sale
+
+@{
+    ViewData["Title"] = "Sale Details";
+}
+
+<h1>Sale Details</h1>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Sale ID:</strong> @Model.SaleId</p>
+        <p>
+            <strong>Date:</strong>
+            @Model.SaleDateTime.ToString("dd MMM yyyy HH:mm")
+        </p>
+        <p><strong>Total:</strong> R @Model.TotalAmount.ToString("N2")</p>
+
+        <hr />
+
+        <h4>Items Sold</h4>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Line Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SaleItems)
+                {
+                    <tr>
+                        <td>@item.ProductId</td>
+                        <td>@item.QuantitySold</td>
+                        <td>R @item.UnitPriceAtSale.ToString("N2")</td>
+                        <td>R @item.LineTotal.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Back to Sales
+        </a>
+    </div>
+</div>

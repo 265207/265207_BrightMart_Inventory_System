@@ -1,0 +1,151 @@
+﻿@model BrightMartInventorySystem.ViewModels.ReportsViewModel
+
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<h1>BrightMart Reports</h1>
+<p>Sales and inventory overview for BrightMart Traders.</p>
+
+<hr />
+
+<h2>Daily Sales Report</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5>Total Sales Today</h5>
+        <h3>R @Model.DailySalesTotal.ToString("N2")</h3>
+        <p>Number of sales: @Model.DailySalesCount</p>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Sale ID</th>
+            <th>Date and Time</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sale in Model.DailySales)
+        {
+            <tr>
+                <td>@sale.SaleId</td>
+                <td>@sale.SaleDateTime.ToString("dd MMM yyyy HH:mm")</td>
+                <td>R @sale.TotalAmount.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.DailySales.Any())
+{
+    <p>No sales recorded today.</p>
+}
+
+<hr />
+
+<h2>Weekly Sales Report</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5>Total Sales This Week</h5>
+        <h3>R @Model.WeeklySalesTotal.ToString("N2")</h3>
+        <p>Number of sales: @Model.WeeklySalesCount</p>
+        <small>Week runs from Monday to today.</small>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Sale ID</th>
+            <th>Date and Time</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sale in Model.WeeklySales)
+        {
+            <tr>
+                <td>@sale.SaleId</td>
+                <td>@sale.SaleDateTime.ToString("dd MMM yyyy HH:mm")</td>
+                <td>R @sale.TotalAmount.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.WeeklySales.Any())
+{
+    <p>No sales recorded this week.</p>
+}
+
+<hr />
+
+<h2>Inventory Report</h2>
+
+<p>Total products: @Model.Inventory.Count</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Quantity in Stock</th>
+            <th>Reorder Level</th>
+            <th>Unit Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Inventory)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.QuantityInStock</td>
+                <td>@product.ReorderLevel</td>
+                <td>R @product.UnitPrice.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2>Low-Stock Alerts</h2>
+
+@if (Model.LowStockProducts.Any())
+{
+    <div class="alert alert-warning">
+        <strong>Attention:</strong>
+        The following products have reached or fallen below their reorder levels.
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Current Stock</th>
+                <th>Reorder Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.LowStockProducts)
+            {
+                <tr>
+                    <td>@product.ProductName</td>
+                    <td>@product.QuantityInStock</td>
+                    <td>@product.ReorderLevel</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-success">
+        All products are currently above their reorder levels.
+    </div>
+}

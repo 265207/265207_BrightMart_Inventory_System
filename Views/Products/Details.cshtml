@@ -1,0 +1,36 @@
+@model BrightMartInventorySystem.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container mt-4">
+    <h1>Product Details</h1>
+
+    <dl class="row">
+        <dt class="col-sm-3">Product ID</dt>
+        <dd class="col-sm-9">@Model.ProductId</dd>
+
+        <dt class="col-sm-3">Product Name</dt>
+        <dd class="col-sm-9">@Model.ProductName</dd>
+
+        <dt class="col-sm-3">Supplier ID</dt>
+        <dd class="col-sm-9">@Model.SupplierId</dd>
+
+        <dt class="col-sm-3">Unit Price</dt>
+        <dd class="col-sm-9">@Model.UnitPrice.ToString("C")</dd>
+
+        <dt class="col-sm-3">Quantity in Stock</dt>
+        <dd class="col-sm-9">@Model.QuantityInStock</dd>
+
+        <dt class="col-sm-3">Reorder Level</dt>
+        <dd class="col-sm-9">@Model.ReorderLevel</dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.ProductId"
+       class="btn btn-primary">Edit</a>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Back
+    </a>
+</div>

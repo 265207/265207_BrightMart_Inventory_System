@@ -1,0 +1,30 @@
+@model BrightMartInventorySystem.Models.Supplier
+
+@{
+    ViewData["Title"] = "Supplier Details";
+}
+
+<div class="container mt-4">
+    <h1>Supplier Details</h1>
+
+    <dl class="row">
+        <dt class="col-sm-3">Supplier ID</dt>
+        <dd class="col-sm-9">@Model.SupplierId</dd>
+
+        <dt class="col-sm-3">Supplier Name</dt>
+        <dd class="col-sm-9">@Model.SupplierName</dd>
+
+        <dt class="col-sm-3">Contact Person</dt>
+        <dd class="col-sm-9">@Model.ContactPerson</dd>
+
+        <dt class="col-sm-3">Phone</dt>
+        <dd class="col-sm-9">@Model.Phone</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.SupplierId"
+       class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</div>

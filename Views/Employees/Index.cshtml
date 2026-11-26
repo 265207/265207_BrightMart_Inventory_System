@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BrightMartInventorySystem.Models.User>
+
+@{
+    ViewData["Title"] = "Employee Management";
+}
+
+<h1>Employee Management</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        Add New Employee
+    </a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.UserId</td>
+                <td>@employee.Username</td>
+                <td>@employee.Role</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>No employees have been registered.</p>
+}

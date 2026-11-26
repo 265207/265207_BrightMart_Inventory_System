@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Record Sale";
+}
+
+<h1>Record a Sale</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group mb-3">
+        <label class="form-label">Select Product</label>
+        <select name="productId"
+                asp-items="ViewBag.Products"
+                class="form-select"
+                required>
+            <option value="">-- Choose a product --</option>
+        </select>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label">Quantity Sold</label>
+        <input type="number"
+               name="quantitySold"
+               class="form-control"
+               min="1"
+               required />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Record Sale
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+</form>

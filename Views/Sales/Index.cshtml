@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BrightMartInventorySystem.Models.Sale>
+
+@{
+    ViewData["Title"] = "Sales";
+}
+
+<h1>Sales Management</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Record New Sale</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Sale ID</th>
+            <th>Date and Time</th>
+            <th>Items Sold</th>
+            <th>Total Amount</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sale in Model)
+        {
+            <tr>
+                <td>@sale.SaleId</td>
+                <td>@sale.SaleDateTime.ToString("dd MMM yyyy HH:mm")</td>
+                <td>@sale.SaleItems.Count</td>
+                <td>R @sale.TotalAmount.ToString("N2")</td>
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@sale.SaleId"
+                       class="btn btn-sm btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>No sales have been recorded yet.</p>
+}
